@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             ['id' => 4, 'nama_lengkap' => 'Amanaisriz', 'email' => 'admin2@telkomuniversity.ac.id', 'no_telepon' => '0876237278317', 'role' => 'admin', 'password_hash' => '$2y$10$R29Bnu5xiDar0vN6jQBuuO/Vx93fv4LpTWLtfKXZZ0i3ngG1BUF46'],
         ], 'created_at'));
 
+        $this->call(UserSeeder::class);
+
         DB::table('sensors')->insert($stamp([
             ['id' => 1, 'kode_sensor' => 'S-ASAP-TULT-01', 'jenis_sensor' => 'asap', 'lokasi_gedung' => 'Gedung TULT Lantai 5', 'status' => 'aktif'],
             ['id' => 2, 'kode_sensor' => 'S-GEMPA-FIT-01', 'jenis_sensor' => 'gempa', 'lokasi_gedung' => 'Gedung FIT Lantai Dasar', 'status' => 'aktif'],

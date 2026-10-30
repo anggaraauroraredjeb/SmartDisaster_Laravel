@@ -16,7 +16,7 @@
             <table class="w-full text-sm">
                 <thead>
                     <tr class="bg-gray-50 border-b border-gray-100">
-                        @foreach (['Judul', 'Kategori', 'Konten', 'Dibuat', 'Aksi'] as $th)
+                        @foreach (['Judul', 'Kategori', 'Konten', 'Berkas', 'Dibuat', 'Aksi'] as $th)
                             <th class="text-left px-5 py-4 text-xs font-bold text-gray-500 uppercase">{{ $th }}</th>
                         @endforeach
                     </tr>
@@ -27,6 +27,16 @@
                             <td class="px-5 py-4 font-semibold text-gray-800">{{ $m->judul }}</td>
                             <td class="px-5 py-4"><x-badge :value="$m->kategori" /></td>
                             <td class="px-5 py-4 text-xs text-gray-500 max-w-[320px]"><span class="line-clamp-2">{{ $m->konten }}</span></td>
+                            <td class="px-5 py-4 whitespace-nowrap">
+                                @if ($m->file_path)
+                                    <div class="flex items-center gap-3 text-xs font-semibold">
+                                        <a href="{{ Storage::disk('public')->url($m->file_path) }}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800">Lihat</a>
+                                        <a href="{{ Storage::disk('public')->url($m->file_path) }}" download class="text-gray-600 hover:text-gray-900">Unduh</a>
+                                    </div>
+                                @else
+                                    <span class="text-xs text-gray-400">-</span>
+                                @endif
+                            </td>
                             <td class="px-5 py-4 text-xs text-gray-500 whitespace-nowrap">{{ $m->created_at?->format('d M Y') }}</td>
                             <td class="px-5 py-4">
                                 <div class="flex items-center gap-4">
@@ -36,7 +46,7 @@
                             </td>
                         </tr>
                     @empty
-                        <tr><td colspan="5"><x-empty text="Belum ada modul edukasi." /></td></tr>
+                        <tr><td colspan="6"><x-empty text="Belum ada modul edukasi." /></td></tr>
                     @endforelse
                 </tbody>
             </table>

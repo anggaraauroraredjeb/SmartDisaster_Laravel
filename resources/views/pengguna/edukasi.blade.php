@@ -24,7 +24,15 @@
                     </div>
                     <i id="icon-{{ $m->id }}" class="fa-solid fa-chevron-down text-gray-400 transition-transform"></i>
                 </button>
-                <div id="konten-{{ $m->id }}" class="hidden px-5 pb-5 text-sm text-gray-600 leading-relaxed whitespace-pre-line">{{ $m->konten }}</div>
+                <div id="konten-{{ $m->id }}" class="hidden px-5 pb-5 text-sm text-gray-600 leading-relaxed whitespace-pre-line">
+                    {{ $m->konten }}
+                    @if ($m->file_path)
+                        <div class="flex gap-4 mt-4 whitespace-normal text-xs font-semibold">
+                            <a href="{{ Storage::disk('public')->url($m->file_path) }}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800">Lihat lampiran</a>
+                            <a href="{{ Storage::disk('public')->url($m->file_path) }}" download class="text-gray-600 hover:text-gray-900">Unduh lampiran</a>
+                        </div>
+                    @endif
+                </div>
             </x-card>
         @empty
             <x-card><x-empty text="Belum ada modul edukasi untuk kategori ini." icon="fa-book-open" /></x-card>

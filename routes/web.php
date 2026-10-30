@@ -19,11 +19,11 @@ Route::view('/fitur', 'landing.fitur')->name('landing.fitur');
 // ===================== SISI PENGGUNA =====================
 // ===================== LOGIN / REGISTRASI =====================
 Route::get('/login', [AuthController::class, 'showLoginPengguna'])->name('login.pengguna');
-Route::post('/login', [AuthController::class, 'loginPengguna'])->name('login.pengguna.submit');
+Route::post('/login', [AuthController::class, 'loginPengguna'])->middleware('throttle:5,1')->name('login.pengguna.submit');
 Route::get('/admin/login', [AuthController::class, 'showLoginAdmin'])->name('login.admin');
-Route::post('/admin/login', [AuthController::class, 'loginAdmin'])->name('login.admin.submit');
+Route::post('/admin/login', [AuthController::class, 'loginAdmin'])->middleware('throttle:5,1')->name('login.admin.submit');
 Route::get('/registrasi', [AuthController::class, 'showRegister'])->name('register');
-Route::post('/registrasi', [AuthController::class, 'register'])->name('register.submit');
+Route::post('/registrasi', [AuthController::class, 'register'])->middleware('throttle:5,1')->name('register.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('login')->name('pengguna.')->group(function () {

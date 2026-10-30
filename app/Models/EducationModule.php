@@ -16,7 +16,7 @@ class EducationModule extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['judul', 'kategori', 'konten', 'created_by'];
+    protected $fillable = ['judul', 'kategori', 'konten', 'file_path', 'created_by'];
 
     protected $casts = ['created_at' => 'datetime'];
 
